@@ -5,7 +5,7 @@ This is a simple example setup with Hobo and Vagrant. You will need to have Vagr
 
 First, start a Virtual Ubuntu 12.04 with ruby 2.0, the latest Hobo and sqlite (it will take some minutes):
 
-    git clone git@github.com:iox/vagranthobo.git
+    git clone https://github.com/iox/vagranthobo.git
     cd vagranthobo
     vagrant up
 
