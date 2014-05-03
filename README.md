@@ -21,6 +21,49 @@ And of course visit [http://localhost:3000](http://localhost:3000) :)
 
 
 
+Using PostgreSQL
+================
+By default this recipe will use Sqlite as a database. If you wish to use postgresql, edit the Vagrantfile like this:
+
+    puppet.manifest_file  = "manifest_postgresql.pp"
+
+The puppet recipe is executed on machine creation (first time you run `vagrant up`). If it was already created and you want to keep it, run `vagrant provision` to run the new recipe and install postgresql.
+
+And finally, when creating the Hobo app, do it like this:
+
+    vagrant ssh
+    cd /vagrant
+    hobo new mysuperapp --setup --database=postgresql
+
+Now edit config/database.yml, and replace all the contents with:
+
+    development:
+      adapter: postgresql
+      encoding: utf8
+      database: mysuperapp_development
+      pool: 5
+      template: template0
+    test:
+      adapter: postgresql
+      encoding: utf8
+      database: mysuperapp_test
+      pool: 5
+      template: template0
+    production:
+      adapter: postgresql
+      encoding: utf8
+      database: mysuperapp_production
+      pool: 5
+      template: template0
+
+And finish the setup in the console:
+
+    cd mysuperapp
+    rake db:setup
+    hobo g migration
+    rails s
+
+
 Notes
 =====
 
